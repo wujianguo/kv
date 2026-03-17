@@ -7,7 +7,7 @@ A Key-Value storage service built on **Cloudflare Workers** + **Cloudflare D1**.
 - **PUT / GET / DELETE / HEAD** endpoints under `/v1/kv/{key}`
 - Single global token authentication (`API_TOKEN` environment variable)
 - Optional TTL per key (`ttl_seconds` or absolute `expire_at`)
-- Automatic expiry cleanup via a Workers Cron trigger (every 10 minutes by default)
+- Automatic expiry cleanup via a Workers Cron trigger (every 10 days by default)
 - Key ≤ 256 bytes, value ≤ 64 KiB (UTF-8)
 
 ---
@@ -212,11 +212,11 @@ curl -X PUT .../v1/kv/perm \
 ## Cron / Scheduled Cleanup
 
 Expired rows are deleted by a scheduled Workers handler. The default cron is
-`*/10 * * * *` (every 10 minutes). Change it in `wrangler.toml`:
+`0 0 */10 * *` (every 10 days). Change it in `wrangler.toml`:
 
 ```toml
 [triggers]
-crons = ["*/10 * * * *"]
+crons = ["0 0 */10 * *"]
 ```
 
 The cleanup runs in batches of 1000 rows (up to 20 batches per invocation) to

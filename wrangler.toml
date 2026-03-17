@@ -6,11 +6,11 @@ compatibility_date = "2024-09-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "kv-store"
-database_id = "YOUR_D1_DATABASE_ID"   # replace after running: wrangler d1 create kv-store
+database_id = "06595950-6a48-4d42-95e6-261f55701713"   # replace after running: wrangler d1 create kv-store
 
-# ─── Cron trigger (runs every 10 minutes) ─────────────────────────────────────
+# ─── Cron trigger (runs every 10 days) ───────────────────────────────────────
 [triggers]
-crons = ["*/10 * * * *"]
+crons = ["0 0 */10 * *"]
 
 # ─── Secrets (set via CLI, never commit values) ───────────────────────────────
 # Run: wrangler secret put API_TOKEN
