@@ -1,0 +1,17 @@
+name = "kv"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+# ─── D1 Database binding ───────────────────────────────────────────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "kv-store"
+database_id = "YOUR_D1_DATABASE_ID"   # replace after running: wrangler d1 create kv-store
+
+# ─── Cron trigger (runs every 10 minutes) ─────────────────────────────────────
+[triggers]
+crons = ["*/10 * * * *"]
+
+# ─── Secrets (set via CLI, never commit values) ───────────────────────────────
+# Run: wrangler secret put API_TOKEN
+# Then enter your token value at the prompt.
